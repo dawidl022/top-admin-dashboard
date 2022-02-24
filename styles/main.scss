@@ -276,6 +276,10 @@ h2 {
       display: grid;
       align-content: space-between;
 
+      h3 {
+        font-size: 1.1rem;
+      }
+
       .text {
         display: grid;
         gap: 0.5rem;
