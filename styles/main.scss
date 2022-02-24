@@ -1,9 +1,12 @@
 ---
 ---
 
+
 :root {
   --main-color: #0091d0;
 }
+
+$shadow: 5px 5px rgba(0, 0, 0, 0.15);
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -16,7 +19,7 @@ h1, h2, h3 {
 }
 
 h2 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .dashboard-page {
@@ -54,12 +57,25 @@ h2 {
 }
 
 @mixin button-hover {
-  filter: brightness(1.1);
-  background-color: hsl(198, 60%, 48%);
+  transition: all 0.1s ease;
+
+  &:hover {
+    filter: brightness(1.1);
+    background-color: hsl(198, 60%, 48%);
+  }
 }
 
 @mixin icon-hover {
-  // TODO
+  border-radius: 50%;
+  padding: 0.6rem;
+  border: 1px solid transparent;
+  transition: all 0.1s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.15);
+  }
 }
 
 .sidebar {
@@ -87,13 +103,12 @@ h2 {
     padding: 1rem;
     cursor: pointer;
 
+
     img[src*="icon"] {
       filter: invert(95%);
     }
 
-    &:hover {
-      @include button-hover();
-    }
+    @include button-hover();
   }
 
   header {
@@ -117,7 +132,7 @@ h2 {
   font-size: 1.1rem;
   padding: 1rem clamp(1rem, 4vw, 4rem);
   gap: 1rem;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 $shadow;
   background-color: #fff;
 
   .search-area {
@@ -133,8 +148,12 @@ h2 {
     input[type="search"] {
       background-color: #e0e7ef;
       border-radius: 20px;
-      padding: 0.3rem 1rem;
+      padding: 0.4rem 1rem;
       min-width: 100%;
+
+      &:focus {
+        outline: 2px solid var(--main-color);
+      }
     }
   }
 
@@ -153,6 +172,10 @@ h2 {
         flex: none;
       }
     }
+
+    .action-icon {
+      @include icon-hover();
+    }
   }
 
   .welcome-area {
@@ -170,7 +193,7 @@ h2 {
       gap: 0.5rem;
 
       h2 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
 
       p {
@@ -195,17 +218,85 @@ h2 {
       background-color: var(--main-color);
       color: white;
       border-radius: 25px;
-    }
-
-    a:hover {
       @include button-hover();
     }
   }
 }
 
 .dashboard {
+  padding: 2rem 1rem;
+  display: grid;
+  gap: 4rem;
+
+  section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  p {
+    color: #636363;
+  }
+
+
   .contents-card, .card {
     background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 5px $shadow;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .announcements  .contents-card {
+    padding: 2.5rem;
+
+    & > article {
+      border-bottom: 1px solid #d1d1d1;
+      padding-bottom: 1rem;
+      display: grid;
+      gap: 0.5rem;
+
+      &:last-child {
+        border: none;
+        padding: 0;
+      }
+    }
+  }
+
+  .projects .card {
+    border-left: 12px solid #f6b241;
+    padding: 2.5rem 1.5rem;
+    display: grid;
+    gap: 0.5rem;
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      padding: 1rem 1rem 0 0;
+
+      & > * {
+        @include icon-hover();
+      }
+    }
+  }
+
+  .trending .contents-card {
+    padding: 2rem;
+    gap: 1.5rem;
+
+    .profile {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.4rem 1rem;
+
+      .user-handle {
+        align-self: end;
+      }
+
+      .avatar {
+        grid-row: span 2;
+      }
+    }
   }
 }
 
@@ -244,6 +335,6 @@ h2 {
 
   .dashboard {
     grid-area: dashboard;
-    overflow: scroll;
+    overflow: auto;
   }
 }
