@@ -226,7 +226,7 @@ h2 {
 .dashboard {
   padding: 2rem 1rem;
   display: grid;
-  gap: 4rem;
+  gap: 3rem;
 
   section {
     display: grid;
@@ -262,20 +262,34 @@ h2 {
     }
   }
 
-  .projects .card {
-    border-left: 12px solid #f6b241;
-    padding: 2.5rem 1.5rem;
-    display: grid;
-    gap: 0.5rem;
+  .projects {
+    padding-bottom: 2rem;
 
-    .controls {
-      display: flex;
+    .container {
+      display: grid;
       gap: 1rem;
-      justify-content: flex-end;
-      padding: 1rem 1rem 0 0;
+    }
 
-      & > * {
-        @include icon-hover();
+    .card {
+      border-left: 12px solid #f6b241;
+      padding: 2.5rem 1.5rem;
+      display: grid;
+      align-content: space-between;
+
+      .text {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .controls {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        padding-right: 1rem;
+
+        & > * {
+          @include icon-hover();
+        }
       }
     }
   }
@@ -300,14 +314,20 @@ h2 {
   }
 }
 
+@media (min-width: 650px) {
+  .projects .container {
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  }
+}
 
-@media (min-width: 1024px) {
+@media (min-width: 1300px) {
   .dashboard-page {
     grid-template-columns: 20rem 1fr;
     grid-template-areas:
       "sidebar header"
       "sidebar dashboard";
     height: 100vh;
+    grid-auto-rows: auto 1fr;
   }
 
   .sidebar {
@@ -322,6 +342,7 @@ h2 {
   .header {
     grid-template-columns: 1fr auto;
     grid-area: header;
+    z-index: 1;
 
     .profile-area {
       order: 0;
@@ -336,5 +357,23 @@ h2 {
   .dashboard {
     grid-area: dashboard;
     overflow: auto;
+    grid-template-columns: 1fr 25rem;
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+
+    .projects {
+      order: -1;
+      grid-row: span 2;
+    }
+
+    .projects .container {
+      gap: 2rem;
+    }
   }
+}
+
+@media (min-width: 1200px) {
+
 }
