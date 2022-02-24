@@ -9,14 +9,15 @@
       content="A sample admin dashboard. Part of The Odin Project Curriculum">
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/main.css">
+    <script src="main.js" defer></script>
   </head>
   <body class="dashboard-page">
     <aside class="sidebar">
-      <header>
+      <header class="toggle" aria-expanded="false" aria-controls="main-nav">
         <img src="assets/icons/view-dashboard.svg" alt="">
         <h1>Dashboard</h1>
       </header>
-      <nav>
+      <nav id="main-nav">
         <section>
           <ul>
             <li><a href="#">

@@ -73,6 +73,10 @@ h2 {
   nav {
     display: grid;
     gap: 3rem;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   header, li a {
@@ -218,6 +222,10 @@ h2 {
   .sidebar {
     grid-area: sidebar;
     align-content: start;
+
+    nav.hidden {
+      display: grid;
+    }
   }
 
   .header {
